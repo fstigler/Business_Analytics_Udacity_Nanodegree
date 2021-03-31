@@ -1,0 +1,45 @@
+/* Query 1 */
+SELECT g1.GenreName, Count(*)
+FROM (SELECT t.Name, t.Milliseconds, g.Name GenreName
+FROM Track t
+JOIN Genre g
+ON t.GenreId = g.GenreId
+WHERE t.Milliseconds > (SELECT AVG(Milliseconds) FROM Track)
+ORDER BY 2 DESC) g1
+Group BY 1;
+
+/* Query 2 */
+SELECT g1.GenreName, Count(*)
+FROM (SELECT t.Name, t.UnitPrice, g.Name GenreName
+FROM Track t
+JOIN Genre g
+ON t.GenreId = g.GenreId
+WHERE t.UnitPrice > (SELECT AVG(UnitPrice) FROM Track)
+ORDER BY 2 DESC) g1
+Group BY 1;
+
+/* Query 3 */
+SELECT a.Title, (SUM(l.Quantity* l.UnitPrice)) AS AmountSpent
+FROM InvoiceLine l
+JOIN Invoice i
+ON l.InvoiceId = i.InvoiceId
+JOIN Track t
+ON l.TrackId = t.TrackId
+JOIN Album a
+ON t.AlbumId = a.AlbumId
+JOIN Genre g
+ON t.GenreId = g.GenreId
+GROUP BY a.Title
+ORDER BY AmountSpent DESC;
+
+/* Query 4 */
+SELECT g.Name, (SUM(l.Quantity* l.UnitPrice)) AS AmountSpent
+FROM InvoiceLine l
+JOIN Invoice i
+ON l.InvoiceId = i.InvoiceId
+JOIN Track t
+ON l.TrackId = t.TrackId
+JOIN Genre g
+ON t.GenreId = g.GenreId
+GROUP BY g.Name
+ORDER BY AmountSpent DESC;
