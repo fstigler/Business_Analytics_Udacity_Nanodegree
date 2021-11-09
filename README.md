@@ -1,5 +1,4 @@
 # Business Analytics Udacity Nanodegree
-Business Analytics by Udacity
 
 ## Overview
 This program is an excellent program for non-technical people who want to make more data driven decisions. You’ll learn data analysis skills and tools that will help you throughout your career, whether
